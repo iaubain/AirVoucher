@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "ng.mobilea.airvoucher"
+        minSdkVersion 17
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/NOTICE' // will not include NOTICE file
+        exclude 'META-INF/LICENSE' // will not include LICENSE file
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+}
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.0'
+    implementation 'com.github.satyan:sugar:1.4'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.karumi:dexter:4.1.0'
+    implementation 'me.everything:providers-android:1.0.1'
+    testImplementation 'junit:junit:4.12'
+    //Butterknife
+    implementation 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ng.mobilea.airvoucher">
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".entities.AppDb"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="airvoucher.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="2" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="ng.mobilea.airvoucher.entities" />
+
+        <!-- Sms Receiver -->
+        <receiver
+            android:name=".services.SmsReceiver"
+            android:exported="true">
+            <intent-filter android:priority="900">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <!-- Boot complete Receiver -->
+        <receiver android:name=".services.BootReceiver"
+            android:exported="true">
+            <intent-filter android:priority="901">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activities.Home"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".services.WorkerService"
+            android:exported="false"></service>
+    </application>
+
+</manifest>
